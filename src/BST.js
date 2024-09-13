@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { Node } from "./Node";
 
 export class BST {
@@ -7,13 +6,17 @@ export class BST {
         this.root = this.buildTree(this.arrData);
     }
 
-    buildTree(arr, start, end) {
-        if (start > end) return null;
-        let mid = (start + end) / 2;
-        let root = new Node(arr[mid]);
+    buildTree(arr) {
 
-        root.left = this.buildTree(arr, 0, mid);
-        root.right = this.buildTree(arr, mid + 1, end);
+        arr.sort((a, b) => a - b);
+        const uniqueArr = [...new Set(arr)];
+
+        if (uniqueArr.length == 0) return null;
+        let mid = uniqueArr.length / 2;
+        let root = new Node(uniqueArr[mid]);
+
+        root.left = this.buildTree(uniqueArr.slice(0, mid));
+        root.right = this.buildTree(uniqueArr.slice(mid));
 
         return root;
     }
