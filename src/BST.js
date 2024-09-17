@@ -21,6 +21,74 @@ export class BST {
         return root;
     }
 
+    insert(root, dataNum) {
+
+        if (root === null)//if tree empty create new node and return it as root
+            return new Node(dataNum);
+
+        // Duplicates not allowed    
+        if (root.data === dataNum)
+            return root;
+
+        if (dataNum < root.data)
+            root.leftChild = this.insert(root.left, dataNum);
+        else if (dataNum > root.data)
+            root.rightChild = this.insert(root.right, dataNum);
+
+        return root;
+    }
+
+    delete(root, x) {
+        // Base case
+        if (root === null) {
+            return root;
+        }
+
+        // If key to be searched is in a subtree
+        if (root.data > x) {
+            root.leftChild = this.delete(root.leftChild, x);
+        } else if (root.key < x) {
+            root.rightChild = this.delete(root.rightChild, x);
+        } else {
+            // If root matches with the given key
+
+            // Cases when root has 0 children or 
+            // only right child
+            if (root.leftChild === null)
+                return root.rightChild;
+
+            // When root has only left child
+            if (root.rightChild === null)
+                return root.leftChild;
+
+            // When both children are present
+            let succ = this.getSuccessor(root);
+            root.data = succ.data;
+            root.rightChild = this.delete(root.rightChild, succ.data);
+        }
+        return root;
+    }
+
+    getSuccessor(curr) {
+        curr = curr.rightChild;
+        while (curr !== null && curr.leftChild !== null) {
+            curr = curr.leftChild;
+        }
+        return curr;
+    }
+
+    find(root, value) {
+        if (root === null) {
+            return root;
+        } else if (root.data < value) {
+            return this.find(root.rightChild, value);
+        } else if (root.data > value) {
+            return this.find(root.leftChild, value);
+        } else {
+            return root;
+        }
+    }
+
     prettyPrint(node, prefix = "", isLeft = true) {
         if (node === null) {
             return;
