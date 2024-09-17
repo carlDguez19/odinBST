@@ -89,6 +89,28 @@ export class BST {
         }
     }
 
+    levelOrder(root, callback) {
+        if (callback === null) {
+            throw new Error("Must enter a callback function!");
+        }
+        if (root === null) {
+            return;
+        }
+        let Q = [];
+        Q.push(root);
+        while (Q.length > 0) {//or while(Q)????
+            let curr = Q.shift();
+            console.log(curr.data)//debug
+            if (curr.leftChild != null) {
+                Q.push(curr.leftChild);
+            }
+            if (curr.rightChild != null) {
+                Q.push(curr.rightChild);
+            }
+            this.callback(curr);
+        }
+    }
+
     prettyPrint(node, prefix = "", isLeft = true) {
         if (node === null) {
             return;
