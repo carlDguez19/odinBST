@@ -111,6 +111,42 @@ export class BST {
         }
     }
 
+    preorder(root, callback) {
+        if (callback === null) {
+            throw new Error("Must enter a callback function!");
+        }
+        if (root === null) {
+            return;
+        }
+        this.callback(root);
+        this.preorder(root.leftChild, callback);
+        this.preorder(root.rightChild, callback);
+    }
+
+    inorder(root, callback) {
+        if (callback === null) {
+            throw new Error("Must enter a callback function!");
+        }
+        if (root === null) {
+            return;
+        }
+        this.inorder(root.leftChild, callback);
+        this.callback(root);
+        this.inorder(root.rightChild, callback);
+    }
+
+    postorder(root, callback) {
+        if (callback === null) {
+            throw new Error("Must enter a callback function!");
+        }
+        if (root === null) {
+            return;
+        }
+        this.postorder(root.leftChild, callback);
+        this.postorder(root.rightChild, callback);
+        this.callback(root);
+    }
+
     prettyPrint(node, prefix = "", isLeft = true) {
         if (node === null) {
             return;
