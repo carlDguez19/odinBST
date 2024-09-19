@@ -147,6 +147,13 @@ export class BST {
         this.callback(root);
     }
 
+    height(node) {
+        if (node == null) {
+            return -1;
+        }
+        return Math.max(this.height(node.leftChild), this.right(node.rightChild)) + 1;
+    }
+
     prettyPrint(node, prefix = "", isLeft = true) {
         if (node === null) {
             return;
