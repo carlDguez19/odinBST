@@ -154,6 +154,22 @@ export class BST {
         return Math.max(this.height(node.leftChild), this.right(node.rightChild)) + 1;
     }
 
+    findDepth(root, x) {
+        let depth = 0;
+        let curr = root;
+        if (root === null) {
+            return -1;
+        } else if (curr.data < x) {
+            curr = curr.rightChild;
+            depth++;
+        } else if (root.data > x) {
+            curr = curr.leftChild;
+            depth++;
+        } else {
+            return depth;
+        }
+    }
+
     prettyPrint(node, prefix = "", isLeft = true) {
         if (node === null) {
             return;
