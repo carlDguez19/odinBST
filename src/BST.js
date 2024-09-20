@@ -170,6 +170,40 @@ export class BST {
         }
     }
 
+    isBalanced(root) {
+        // Base condition
+        if (root == null)
+            return true
+
+        // for left and right subtree height
+        let lh = this.height(root.leftChild);
+        let rh = this.height(root.rightChild);
+
+        // allowed values for (lh - rh) are 1, -1, 0
+        if (Math.abs(lh - rh) <= 1 && this.isBalanced(root.leftChild) == true && this.isBalanced(root.rightChild) == true)
+            return true;
+
+        // if we reach here means tree is not 
+        // height-balanced tree
+        return false;
+    }
+
+    inorderArr(root) {
+        let arr = [];
+        if (this.root === null) {
+            return;
+        }
+        this.inorderArr(root.leftChild);
+        arr.push(this.root.data);
+        this.inorderArr(root.rightChild);
+        return arr;
+    }
+
+    rebalance() {
+        let newArr = this.inorderArr(this.root);
+        this.buildTree(newArr);
+    }
+
     prettyPrint(node, prefix = "", isLeft = true) {
         if (node === null) {
             return;
