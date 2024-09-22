@@ -7,7 +7,7 @@ export class BST {
     }
 
     buildTree(arr) {
-
+        //sort and get rid of duplicates
         arr.sort((a, b) => a - b);
         const uniqueArr = [...new Set(arr)];
 
@@ -31,24 +31,24 @@ export class BST {
             return root;
 
         if (dataNum < root.data)
-            root.leftChild = this.insert(root.left, dataNum);
+            root.leftChild = this.insert(root.leftChild, dataNum);
         else if (dataNum > root.data)
-            root.rightChild = this.insert(root.right, dataNum);
+            root.rightChild = this.insert(root.rightChild, dataNum);
 
         return root;
     }
 
-    delete(root, x) {
+    delete(root, dataNum) {
         // Base case
         if (root === null) {
             return root;
         }
 
         // If key to be searched is in a subtree
-        if (root.data > x) {
-            root.leftChild = this.delete(root.leftChild, x);
-        } else if (root.key < x) {
-            root.rightChild = this.delete(root.rightChild, x);
+        if (root.data > dataNum) {
+            root.leftChild = this.delete(root.leftChild, dataNum);
+        } else if (root.key < dataNum) {
+            root.rightChild = this.delete(root.rightChild, dataNum);
         } else {
             // If root matches with the given key
 
@@ -77,13 +77,13 @@ export class BST {
         return curr;
     }
 
-    find(root, value) {
+    find(root, dataNum) {
         if (root === null) {
             return root;
-        } else if (root.data < value) {
-            return this.find(root.rightChild, value);
-        } else if (root.data > value) {
-            return this.find(root.leftChild, value);
+        } else if (root.data < dataNum) {
+            return this.find(root.rightChild, dataNum);
+        } else if (root.data > dataNum) {
+            return this.find(root.leftChild, dataNum);
         } else {
             return root;
         }
