@@ -204,6 +204,10 @@ export class BST {
         this.buildTree(newArr);
     }
 
+    poop(node) {
+        console.log(node.data);
+    }
+
     prettyPrint(node, prefix = "", isLeft = true) {
         if (node === null) {
             return;
