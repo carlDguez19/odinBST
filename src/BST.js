@@ -3,22 +3,29 @@ import { Node } from "./Node";
 export class BST {
     constructor(arr) {
         this.arrData = arr;
-        this.root = this.buildTree(this.arrData);
+        this.root = this.buildTree(arr);
     }
 
     buildTree(arr) {
         //sort and get rid of duplicates
-        arr.sort((a, b) => a - b);
-        const uniqueArr = [...new Set(arr)];
+        const uniqueSet = new Set(arr);
+        const uniqueArr = Array.from(uniqueSet);
+        uniqueArr.sort((a, b) => a - b);
 
-        if (uniqueArr.length == 0) return null;
-        let mid = uniqueArr.length / 2;
-        let root = new Node(uniqueArr[mid]);
 
-        root.left = this.buildTree(uniqueArr.slice(0, mid));
-        root.right = this.buildTree(uniqueArr.slice(mid));
+        if (uniqueArr.length < 1) {
+            return null;
+        } else {
+            let mid = uniqueArr.length / 2;
+            let root = new Node(uniqueArr[mid]);
 
-        return root;
+            root.leftChild = this.buildTree(uniqueArr.slice(0, mid));
+            console.log("here321");
+            root.rightChild = this.buildTree(uniqueArr.slice(mid + 1));
+
+            return root;
+        }
+
     }
 
     insert(root, dataNum) {
@@ -151,7 +158,7 @@ export class BST {
         if (node == null) {
             return -1;
         }
-        return Math.max(this.height(node.leftChild), this.right(node.rightChild)) + 1;
+        return Math.max(this.height(node.leftChild), this.height(node.rightChild)) + 1;
     }
 
     findDepth(root, x) {
@@ -212,12 +219,13 @@ export class BST {
         if (node === null) {
             return;
         }
-        if (node.right !== null) {
-            this.prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+        if (node.rightChild !== null) {
+            this.prettyPrint(node.rightChild, `${prefix}${isLeft ? "│   " : "    "}`, false);
         }
+        console.log("lollipop: " + node.data)
         console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
-        if (node.left !== null) {
-            this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+        if (node.leftChild !== null) {
+            this.prettyPrint(node.leftChild, `${prefix}${isLeft ? "    " : "│   "}`, true);
         }
     };
 
