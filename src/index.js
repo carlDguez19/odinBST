@@ -1,13 +1,15 @@
 import { BST } from "./BST";
+import { poop } from "./BST";
 
 let ogArr = createArr();
 let firstBST = new BST(ogArr);
-console.log(firstBST.root.data);
+let fbstRoot = firstBST.root;
+//console.log(firstBST.root.data);
 
-// firstBST.prettyPrint(fbstRoot);
-// let isBalancedBool = firstBST.isBalanced(fbstRoot);
-// console.log(isBalancedBool);
-// firstBST.levelOrder(fbstRoot, 'poop');
+firstBST.prettyPrint(fbstRoot);
+let isBalancedBool = firstBST.isBalanced(fbstRoot);
+console.log(isBalancedBool);
+firstBST.levelOrder(fbstRoot, poop);
 // firstBST.preorder(fbstRoot, 'poop');
 // firstBST.inorder(fbstRoot, 'poop');
 // firstBST.postorder(fbstRoot, 'poop');
@@ -25,8 +27,8 @@ console.log(firstBST.root.data);
 
 function createArr() {
     let arr = [];
-    for (let i = 0; i < 3; i++) {
-        arr.push(Math.random() * 100);
+    for (let i = 0; i < 6; i++) {
+        arr.push(Math.floor(Math.random() * 100));
     }
     return arr;
 }

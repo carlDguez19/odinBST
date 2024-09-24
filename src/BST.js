@@ -16,8 +16,9 @@ export class BST {
         if (uniqueArr.length < 1) {
             return null;
         } else {
-            let mid = uniqueArr.length / 2;
+            let mid = Math.floor(uniqueArr.length / 2);
             let root = new Node(uniqueArr[mid]);
+            console.log("test root data: " + root.data);
 
             root.leftChild = this.buildTree(uniqueArr.slice(0, mid));
             console.log("here321");
@@ -107,14 +108,13 @@ export class BST {
         Q.push(root);
         while (Q.length > 0) {//or while(Q)????
             let curr = Q.shift();
-            console.log(curr.data)//debug
             if (curr.leftChild != null) {
                 Q.push(curr.leftChild);
             }
             if (curr.rightChild != null) {
                 Q.push(curr.rightChild);
             }
-            this.callback(curr);
+            callback(curr);
         }
     }
 
@@ -211,22 +211,21 @@ export class BST {
         this.buildTree(newArr);
     }
 
-    poop(node) {
-        console.log(node.data);
-    }
-
-    prettyPrint(node, prefix = "", isLeft = true) {
+    prettyPrint = (node, prefix = "", isLeft = true) => {
         if (node === null) {
             return;
         }
         if (node.rightChild !== null) {
             this.prettyPrint(node.rightChild, `${prefix}${isLeft ? "│   " : "    "}`, false);
         }
-        console.log("lollipop: " + node.data)
         console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
         if (node.leftChild !== null) {
             this.prettyPrint(node.leftChild, `${prefix}${isLeft ? "    " : "│   "}`, true);
         }
     };
 
+}
+
+export function poop(node) {
+    console.log(node.data);
 }
