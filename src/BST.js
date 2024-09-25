@@ -46,6 +46,23 @@ export class BST {
         return root;
     }
 
+    insertInverse(root, dataNum) {
+
+        if (root === null)//if tree empty create new node and return it as root
+            return new Node(dataNum);
+
+        // Duplicates not allowed    
+        if (root.data === dataNum)
+            return root;
+
+        if (dataNum < root.data)
+            root.rightChild = this.insert(root.rightChild, dataNum);
+        else if (dataNum > root.data)
+            root.leftChild = this.insert(root.leftChild, dataNum);
+
+        return root;
+    }
+
     delete(root, dataNum) {
         // Base case
         if (root === null) {
@@ -125,7 +142,7 @@ export class BST {
         if (root === null) {
             return;
         }
-        this.callback(root);
+        callback(root);
         this.preorder(root.leftChild, callback);
         this.preorder(root.rightChild, callback);
     }
@@ -138,7 +155,7 @@ export class BST {
             return;
         }
         this.inorder(root.leftChild, callback);
-        this.callback(root);
+        callback(root);
         this.inorder(root.rightChild, callback);
     }
 
@@ -151,7 +168,7 @@ export class BST {
         }
         this.postorder(root.leftChild, callback);
         this.postorder(root.rightChild, callback);
-        this.callback(root);
+        callback(root);
     }
 
     height(node) {
@@ -195,20 +212,12 @@ export class BST {
         return false;
     }
 
-    inorderArr(root) {
-        let arr = [];
-        if (this.root === null) {
-            return;
-        }
-        this.inorderArr(root.leftChild);
-        arr.push(this.root.data);
-        this.inorderArr(root.rightChild);
-        return arr;
-    }
-
-    rebalance() {
-        let newArr = this.inorderArr(this.root);
-        this.buildTree(newArr);
+    rebalance(arr) {
+        //let arr = [];
+        //let newArr = this.inorderArr(oldArr, arr);
+        let rebRoot = this.buildTree(arr);
+        this.root = rebRoot;
+        return rebRoot;
     }
 
     prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -226,6 +235,6 @@ export class BST {
 
 }
 
-export function poop(node) {
+export function printer(node) {
     console.log(node.data);
 }

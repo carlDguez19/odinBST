@@ -1,5 +1,5 @@
 import { BST } from "./BST";
-import { poop } from "./BST";
+import { printer } from "./BST";
 
 let ogArr = createArr();
 let firstBST = new BST(ogArr);
@@ -9,19 +9,33 @@ let fbstRoot = firstBST.root;
 firstBST.prettyPrint(fbstRoot);
 let isBalancedBool = firstBST.isBalanced(fbstRoot);
 console.log(isBalancedBool);
-firstBST.levelOrder(fbstRoot, poop);
-// firstBST.preorder(fbstRoot, 'poop');
-// firstBST.inorder(fbstRoot, 'poop');
-// firstBST.postorder(fbstRoot, 'poop');
-// ogArr.push(115);
-// ogArr.push(123);
-// let isBalancedBool2 = firstBST.isBalanced(fbstRoot);
-// console.log(isBalancedBool2);
-// firstBST.rebalance();
-// let isBalancedBool3 = firstBST.isBalanced(fbstRoot);
-// console.log(isBalancedBool3);
-// firstBST.levelOrder(fbstRoot, 'poop');
-// firstBST.preorder(fbstRoot, 'poop');
+console.log("levelOrder: ")
+firstBST.levelOrder(fbstRoot, printer);
+firstBST.prettyPrint(fbstRoot);
+console.log("\n\npreOrder: ")
+firstBST.preorder(fbstRoot, printer);
+firstBST.prettyPrint(fbstRoot);
+console.log("\n\ninorder: ")
+firstBST.inorder(fbstRoot, printer);
+firstBST.prettyPrint(fbstRoot);
+console.log("\n\npostOrder: ");
+firstBST.postorder(fbstRoot, printer);
+firstBST.insertInverse(fbstRoot, 115);
+firstBST.insertInverse(fbstRoot, 123);
+ogArr.push(115);
+ogArr.push(123);
+firstBST.prettyPrint(fbstRoot);
+let isBalancedBool3 = firstBST.isBalanced(fbstRoot);
+console.log(isBalancedBool3);
+let newRoot = firstBST.rebalance(ogArr);
+firstBST.prettyPrint(newRoot);
+let isBalancedBool4 = firstBST.isBalanced(newRoot.root);
+console.log(isBalancedBool4);
+console.log("\n\nlevelOrder: ")
+firstBST.levelOrder(newRoot.root, printer);
+console.log("\n\npreOrder: ")
+firstBST.prettyPrint(newRoot);
+firstBST.preorder(newRoot.root, printer);
 // firstBST.inorder(fbstRoot, 'poop');
 // firstBST.postorder(fbstRoot, 'poop');
 
