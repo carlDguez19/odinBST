@@ -107,7 +107,7 @@ export class BST {
 
     find(root, dataNum) {
         if (root === null) {
-            return root;
+            throw new Error("node does not exist");
         } else if (root.data < dataNum) {
             return this.find(root.rightChild, dataNum);
         } else if (root.data > dataNum) {

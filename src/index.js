@@ -49,7 +49,8 @@ firstBST.prettyPrint(newRoot);
 newRoot = firstBST.delete(newRoot, 50);
 console.log("\n\n\n\n\n");
 firstBST.prettyPrint(newRoot);
-
+let foundNode = firstBST.find(newRoot, 1);
+console.log(foundNode.data);
 function createArr() {
     let arr = [];
     for (let i = 0; i < 6; i++) {
