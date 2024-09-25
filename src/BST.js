@@ -107,7 +107,7 @@ export class BST {
 
     find(root, dataNum) {
         if (root === null) {
-            throw new Error("node does not exist");
+            return Number.NEGATIVE_INFINITY;
         } else if (root.data < dataNum) {
             return this.find(root.rightChild, dataNum);
         } else if (root.data > dataNum) {
@@ -182,18 +182,20 @@ export class BST {
     }
 
     findDepth(root, x) {
-        let depth = 0;
-        let curr = root;
+        // let depth = 0;
+        // let curr = root;
         if (root === null) {
-            return -1;
-        } else if (curr.data < x) {
-            curr = curr.rightChild;
-            depth++;
+            return Number.NEGATIVE_INFINITY;
+        } else if (root.data < x) {
+            // curr = curr.rightChild;
+            // depth++;
+            return this.findDepth(root.rightChild, x) + 1
         } else if (root.data > x) {
-            curr = curr.leftChild;
-            depth++;
+            // curr = curr.leftChild;
+            // depth++;
+            return this.findDepth(root.leftChild, x) + 1
         } else {
-            return depth;
+            return 0;
         }
     }
 
