@@ -18,10 +18,8 @@ export class BST {
         } else {
             let mid = Math.floor(uniqueArr.length / 2);
             let root = new Node(uniqueArr[mid]);
-            console.log("test root data: " + root.data);
 
             root.leftChild = this.buildTree(uniqueArr.slice(0, mid));
-            console.log("here321");
             root.rightChild = this.buildTree(uniqueArr.slice(mid + 1));
 
             return root;
@@ -71,21 +69,26 @@ export class BST {
 
         // If key to be searched is in a subtree
         if (root.data > dataNum) {
+            console.log("here then");
             root.leftChild = this.delete(root.leftChild, dataNum);
-        } else if (root.key < dataNum) {
+            //return root;
+        } else if (root.data < dataNum) {
+            console.log("should be here to delete");
             root.rightChild = this.delete(root.rightChild, dataNum);
+            //return root;
         } else {
             // If root matches with the given key
 
             // Cases when root has 0 children or 
             // only right child
-            if (root.leftChild === null)
+            if (root.leftChild === null) {
+                console.log('about to delete');
                 return root.rightChild;
-
+            }
             // When root has only left child
-            if (root.rightChild === null)
+            if (root.rightChild === null) {
                 return root.leftChild;
-
+            }
             // When both children are present
             let succ = this.getSuccessor(root);
             root.data = succ.data;
