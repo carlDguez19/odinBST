@@ -69,11 +69,9 @@ export class BST {
 
         // If key to be searched is in a subtree
         if (root.data > dataNum) {
-            console.log("here then");
             root.leftChild = this.delete(root.leftChild, dataNum);
             //return root;
         } else if (root.data < dataNum) {
-            console.log("should be here to delete");
             root.rightChild = this.delete(root.rightChild, dataNum);
             //return root;
         } else {
@@ -82,7 +80,6 @@ export class BST {
             // Cases when root has 0 children or 
             // only right child
             if (root.leftChild === null) {
-                console.log('about to delete');
                 return root.rightChild;
             }
             // When root has only left child

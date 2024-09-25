@@ -4,7 +4,6 @@ import { printer } from "./BST";
 let ogArr = createArr();
 let firstBST = new BST(ogArr);
 let fbstRoot = firstBST.root;
-//console.log(firstBST.root.data);
 
 firstBST.prettyPrint(fbstRoot);
 let isBalancedBool = firstBST.isBalanced(fbstRoot);
